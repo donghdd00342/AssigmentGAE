@@ -1,0 +1,49 @@
+<mat-tab-group>
+  <mat-tab label="Edit">
+    <div class="tab-content">
+      <form [formGroup]="form">
+        <div class="edit-container">
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name" type="text">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Unit Price" formControlName="unitPrice" type="number">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Quantity" formControlName="quantity" type="number">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Rate" formControlName="rate">
+              <mat-option *ngFor="let rate of rates" [value]="rate">{{rate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Producer" formControlName="producer">
+              <mat-option *ngFor="let producer of producers" [value]="producer">{{producer}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="pad10">
+            <button mat-raised-button color="primary" (click)="updateAction()" [disabled]="!form.valid">Update</button>
+            <button mat-raised-button (click)="resetAction()">Reset</button>
+            <button mat-raised-button (click)="closeDialog()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Delete">
+    <div class="tab-content">
+      <h2 class="pad10">Are you sure?</h2>
+      <div class="pad10">
+        <button mat-raised-button color="warn" (click)="configDelete()">Yes</button>
+        <button mat-raised-button (click)="closeDialog()">No</button>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

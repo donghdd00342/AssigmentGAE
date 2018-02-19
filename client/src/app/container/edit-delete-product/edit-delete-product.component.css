@@ -1,0 +1,9 @@
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+}
+
+.edit-container > * {
+  width: 100%;
+}

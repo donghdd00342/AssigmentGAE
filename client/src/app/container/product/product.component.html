@@ -1,0 +1,92 @@
+<mat-tab-group #myTab>
+  <mat-tab label="Products List">
+    <div class="tab-content">
+      <div class="table-tab-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+      </div>
+
+      <div class="table-tab-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+          <!--<ng-container matColumnDef="select">-->
+            <!--<mat-header-cell *matHeaderCellDef>Select</mat-header-cell>-->
+            <!--<mat-cell *matCellDef="let row">-->
+              <!--<mat-radio-button [checked]="selection === row"></mat-radio-button>-->
+            <!--</mat-cell>-->
+          <!--</ng-container>-->
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="unitPrice">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Unit Price </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.unitPrice}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="rate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Rate </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.rate}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="producer">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Producer </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.producer}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="setSelected(row)" style="cursor: pointer">
+          </mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Add new">
+    <div class="m-all-15 pad-all-15 mat-elevation-z8">
+      <form [formGroup]="formCreate">
+        <div class="edit-container">
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name" type="text">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Unit Price" formControlName="unitPrice" type="number">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Quantity" formControlName="quantity" type="number">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Rate" formControlName="rate">
+              <mat-option *ngFor="let rate of rates" [value]="rate">{{rate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Producer" formControlName="producer">
+              <mat-option *ngFor="let producer of producers" [value]="producer">{{producer}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="pad10">
+            <button mat-raised-button color="primary" (click)="createAction()" [disabled]="!formCreate.valid">Add now</button>
+            <button mat-raised-button (click)="formCreate.reset()">Reset</button>
+            <button mat-raised-button (click)="quickAdd()">Quick Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>

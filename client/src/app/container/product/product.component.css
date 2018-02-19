@@ -1,0 +1,24 @@
+.tab-content {
+  padding: 10px;
+}
+
+.table-tab-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.table-tab-header {
+  min-height: 64px;
+  padding: 8px 0 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
