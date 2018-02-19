@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <listener>
+        <listener-class>config.AppBootstrapper</listener-class>
+    </listener>
+    <filter>
+        <filter-name>ObjectifyFilter</filter-name>
+        <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ObjectifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>config.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>endpoint.ProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/api/v1/products/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProductMockServlet</servlet-name>
+        <servlet-class>endpoint.ProductMockServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductMockServlet</servlet-name>
+        <url-pattern>/api/v1/mock/*</url-pattern>
+    </servlet-mapping>
+</web-app>
